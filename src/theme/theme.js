@@ -1,7 +1,16 @@
 import { createTheme } from '@mui/material/styles';
 
+// Get the current language from localStorage or default to English
+const currentLanguage = localStorage.getItem('language') || 'en';
+const direction = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+
+// Set the HTML dir attribute based on the current language
+document.documentElement.dir = direction;
+document.documentElement.lang = currentLanguage;
+
 // Create a theme instance with government-style design
 const theme = createTheme({
+  direction, // This will set the direction for Material-UI components
   palette: {
     primary: {
       main: '#1a3a6e', // Deep blue - common in government sites
@@ -25,7 +34,9 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Roboto", "Arial", sans-serif',
+    fontFamily: direction === 'rtl' ? 
+      '"Tajawal", "Roboto", "Arial", sans-serif' : 
+      '"Roboto", "Arial", sans-serif',
     h1: {
       fontSize: '2.5rem',
       fontWeight: 700,
@@ -40,30 +51,26 @@ const theme = createTheme({
     },
     h4: {
       fontSize: '1.5rem',
-      fontWeight: 500,
+      fontWeight: 600,
     },
     h5: {
       fontSize: '1.25rem',
-      fontWeight: 500,
+      fontWeight: 600,
     },
     h6: {
       fontSize: '1rem',
-      fontWeight: 500,
+      fontWeight: 600,
     },
     button: {
       textTransform: 'none',
       fontWeight: 500,
     },
   },
-  shape: {
-    borderRadius: 4,
-  },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
           borderRadius: 4,
-          padding: '8px 16px',
         },
         contained: {
           boxShadow: 'none',
@@ -73,8 +80,8 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
           borderRadius: 8,
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
         },
       },
     },

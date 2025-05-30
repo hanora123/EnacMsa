@@ -29,6 +29,7 @@ import HelpIcon from '@mui/icons-material/Help';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
 const Header = ({ onLogout }) => {
   const theme = useTheme();
@@ -37,6 +38,9 @@ const Header = ({ onLogout }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [languageMenu, setLanguageMenu] = useState(null);
   const [userMenu, setUserMenu] = useState(null);
+  
+  // Add translation hook
+  const { t, i18n } = useTranslation();
   
   // Mock user data (will be replaced with actual auth)
   const user = {
@@ -70,20 +74,30 @@ const Header = ({ onLogout }) => {
     }
   };
 
+  // Add this function to handle language change
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    localStorage.setItem('language', lng);
+    handleCloseMenus();
+    // Set document direction based on language
+    document.documentElement.dir = lng === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = lng;
+  };
+
   const menuItems = [
-    { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
-    { text: 'Citizen Profiles', icon: <PeopleIcon />, path: '/citizens' },
-    { text: 'Card Management', icon: <CreditCardIcon />, path: '/cards' },
-    { text: 'Institutions', icon: <LocalHospitalIcon />, path: '/institutions' },
-    { text: 'Reports', icon: <AssessmentIcon />, path: '/reports' },
-    { text: 'Support', icon: <HelpIcon />, path: '/support' },
+    { text: t('navigation.dashboard'), icon: <DashboardIcon />, path: '/dashboard' },
+    { text: t('navigation.citizenProfiles'), icon: <PeopleIcon />, path: '/citizens' },
+    { text: t('navigation.cardManagement'), icon: <CreditCardIcon />, path: '/cards' },
+    { text: t('navigation.institutions'), icon: <LocalHospitalIcon />, path: '/institutions' },
+    { text: t('navigation.reports'), icon: <AssessmentIcon />, path: '/reports' },
+    { text: t('navigation.support'), icon: <HelpIcon />, path: '/support' },
   ];
 
   const drawer = (
     <Box sx={{ width: 250 }}>
       <Box sx={{ p: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Typography variant="h6" component="div" sx={{ fontWeight: 'bold' }}>
-          NFC ID System
+          {t('appName')}
         </Typography>
       </Box>
       <Divider />
@@ -115,7 +129,7 @@ const Header = ({ onLogout }) => {
           </IconButton>
           
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            NFC Insurance ID System
+            {t('appName')}
           </Typography>
           
           <IconButton color="inherit" onClick={handleLanguageMenu}>
@@ -126,8 +140,8 @@ const Header = ({ onLogout }) => {
             open={Boolean(languageMenu)}
             onClose={handleCloseMenus}
           >
-            <MenuItem onClick={handleCloseMenus}>English</MenuItem>
-            <MenuItem onClick={handleCloseMenus}>العربية</MenuItem>
+            <MenuItem onClick={() => changeLanguage('en')}>English</MenuItem>
+            <MenuItem onClick={() => changeLanguage('ar')}>العربية</MenuItem>
           </Menu>
           
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -147,9 +161,9 @@ const Header = ({ onLogout }) => {
             open={Boolean(userMenu)}
             onClose={handleCloseMenus}
           >
-            <MenuItem onClick={handleCloseMenus}>Profile</MenuItem>
-            <MenuItem onClick={handleCloseMenus}>Settings</MenuItem>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={handleCloseMenus}>{t('user.profile')}</MenuItem>
+            <MenuItem onClick={handleCloseMenus}>{t('user.settings')}</MenuItem>
+            <MenuItem onClick={handleLogout}>{t('user.logout')}</MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
@@ -158,6 +172,14 @@ const Header = ({ onLogout }) => {
         variant={isMobile ? 'temporary' : 'persistent'}
         open={drawerOpen}
         onClose={handleDrawerToggle}
+        anchor={i18n.language === 'ar' ? 'right' : 'left'}
+        sx={{
+          '& .MuiDrawer-paper': {
+            marginTop: '64px', // This ensures the drawer appears below the AppBar
+            height: 'calc(100% - 64px)',
+            boxSizing: 'border-box',
+          },
+        }}
       >
         {drawer}
       </Drawer>

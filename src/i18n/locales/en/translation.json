@@ -1,0 +1,49 @@
+{
+  "appName": "NFC Insurance ID System",
+  "navigation": {
+    "dashboard": "Dashboard",
+    "citizenProfiles": "Citizen Profiles",
+    "cardManagement": "Card Management",
+    "institutions": "Institutions",
+    "reports": "Reports",
+    "support": "Support"
+  },
+  "user": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "footer": {
+    "rights": "© {{year}} National Insurance ID Card System. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact Us"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "stats": {
+      "totalCitizens": "Total Citizens",
+      "cardsIssued": "Cards Issued",
+      "pendingCards": "Pending Cards",
+      "activeInstitutions": "Active Institutions"
+    },
+    "recentActivity": {
+      "title": "Recent Activity",
+      "viewAll": "View All Activity",
+      "actions": {
+        "cardIssued": "Card issued",
+        "profileAccessed": "Profile accessed",
+        "cardRevoked": "Card revoked",
+        "newCitizen": "New citizen registered"
+      }
+    },
+    "alerts": {
+      "title": "Alerts",
+      "messages": {
+        "pendingCards": "{{count}} cards pending issuance",
+        "expiringLicenses": "{{count}} institution licenses expiring this month",
+        "maintenance": "System maintenance scheduled for {{date}}"
+      }
+    }
+  }
+}

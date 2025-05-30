@@ -19,6 +19,7 @@ import {
   LocalHospitalOutlined, 
   WarningOutlined 
 } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
 // Mock data (will be replaced with actual data from backend)
 const mockStats = {
@@ -27,56 +28,61 @@ const mockStats = {
   pendingCards: 423,
   activeInstitutions: 156,
   recentActivity: [
-    { id: 1, action: 'Card issued', citizen: 'Ahmed Mohamed', timestamp: '2023-11-15 14:32' },
-    { id: 2, action: 'Profile accessed', citizen: 'Sara Ahmed', timestamp: '2023-11-15 13:45' },
-    { id: 3, action: 'Card revoked', citizen: 'Mahmoud Ali', timestamp: '2023-11-15 11:20' },
-    { id: 4, action: 'New citizen registered', citizen: 'Fatima Hussein', timestamp: '2023-11-15 10:05' },
+    { id: 1, action: 'cardIssued', citizen: 'Ahmed Mohamed', timestamp: '2023-11-15 14:32' },
+    { id: 2, action: 'profileAccessed', citizen: 'Sara Ahmed', timestamp: '2023-11-15 13:45' },
+    { id: 3, action: 'cardRevoked', citizen: 'Mahmoud Ali', timestamp: '2023-11-15 11:20' },
+    { id: 4, action: 'newCitizen', citizen: 'Fatima Hussein', timestamp: '2023-11-15 10:05' },
   ],
   alerts: [
-    { id: 1, type: 'warning', message: '423 cards pending issuance' },
-    { id: 2, type: 'error', message: '15 institution licenses expiring this month' },
-    { id: 3, type: 'info', message: 'System maintenance scheduled for 20th November' },
+    { id: 1, type: 'warning', message: 'pendingCards', count: 423 },
+    { id: 2, type: 'error', message: 'expiringLicenses', count: 15 },
+    { id: 3, type: 'info', message: 'maintenance', date: '20th November' },
   ]
 };
 
-const StatCard = ({ icon, title, value, color }) => (
-  <Card elevation={2}>
-    <CardContent>
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Box sx={{ 
-          bgcolor: `${color}.light`, 
-          color: `${color}.main`, 
-          p: 1.5, 
-          borderRadius: 2,
-          mr: 2
-        }}>
-          {icon}
+const StatCard = ({ icon, title, value, color }) => {
+  return (
+    <Card elevation={2}>
+      <CardContent>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ 
+            bgcolor: `${color}.light`, 
+            color: `${color}.main`, 
+            p: 1.5, 
+            borderRadius: 2,
+            mr: 2
+          }}>
+            {icon}
+          </Box>
+          <Box>
+            <Typography variant="h6" component="div">
+              {value.toLocaleString()}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {title}
+            </Typography>
+          </Box>
         </Box>
-        <Box>
-          <Typography variant="h6" component="div">
-            {value.toLocaleString()}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {title}
-          </Typography>
-        </Box>
-      </Box>
-    </CardContent>
-  </Card>
-);
+      </CardContent>
+    </Card>
+  );
+};
 
 const Dashboard = () => {
+  // Add translation hook
+  const { t } = useTranslation();
+  
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
-        Dashboard
+        {t('dashboard.title')}
       </Typography>
       
       <Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={6} md={3}>
           <StatCard 
             icon={<PeopleOutline />} 
-            title="Total Citizens" 
+            title={t('dashboard.stats.totalCitizens')} 
             value={mockStats.totalCitizens} 
             color="primary"
           />
@@ -84,7 +90,7 @@ const Dashboard = () => {
         <Grid item xs={12} sm={6} md={3}>
           <StatCard 
             icon={<CreditCardOutlined />} 
-            title="Cards Issued" 
+            title={t('dashboard.stats.cardsIssued')} 
             value={mockStats.cardsIssued} 
             color="success"
           />
@@ -92,7 +98,7 @@ const Dashboard = () => {
         <Grid item xs={12} sm={6} md={3}>
           <StatCard 
             icon={<CreditCardOutlined />} 
-            title="Pending Cards" 
+            title={t('dashboard.stats.pendingCards')} 
             value={mockStats.pendingCards} 
             color="warning"
           />
@@ -100,7 +106,7 @@ const Dashboard = () => {
         <Grid item xs={12} sm={6} md={3}>
           <StatCard 
             icon={<LocalHospitalOutlined />} 
-            title="Active Institutions" 
+            title={t('dashboard.stats.activeInstitutions')} 
             value={mockStats.activeInstitutions} 
             color="info"
           />
@@ -110,14 +116,14 @@ const Dashboard = () => {
       <Grid container spacing={3}>
         <Grid item xs={12} md={8}>
           <Card elevation={2}>
-            <CardHeader title="Recent Activity" />
+            <CardHeader title={t('dashboard.recentActivity.title')} />
             <Divider />
             <List>
               {mockStats.recentActivity.map((activity) => (
                 <React.Fragment key={activity.id}>
                   <ListItem>
                     <ListItemText 
-                      primary={activity.action}
+                      primary={t(`dashboard.recentActivity.actions.${activity.action}`)}
                       secondary={
                         <>
                           <Typography component="span" variant="body2">
@@ -133,7 +139,7 @@ const Dashboard = () => {
               ))}
             </List>
             <Box sx={{ p: 2, display: 'flex', justifyContent: 'center' }}>
-              <Button variant="text">View All Activity</Button>
+              <Button variant="text">{t('dashboard.recentActivity.viewAll')}</Button>
             </Box>
           </Card>
         </Grid>
@@ -141,7 +147,7 @@ const Dashboard = () => {
         <Grid item xs={12} md={4}>
           <Card elevation={2}>
             <CardHeader 
-              title="Alerts" 
+              title={t('dashboard.alerts.title')} 
               avatar={<WarningOutlined color="warning" />}
             />
             <Divider />
@@ -150,7 +156,11 @@ const Dashboard = () => {
                 <React.Fragment key={alert.id}>
                   <ListItem>
                     <ListItemText 
-                      primary={alert.message}
+                      primary={
+                        alert.message === 'maintenance' 
+                          ? t(`dashboard.alerts.messages.${alert.message}`, { date: alert.date })
+                          : t(`dashboard.alerts.messages.${alert.message}`, { count: alert.count })
+                      }
                       primaryTypographyProps={{ color: `${alert.type}.main` }}
                     />
                   </ListItem>

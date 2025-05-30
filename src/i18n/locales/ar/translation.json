@@ -1,0 +1,49 @@
+{
+  "appName": "نظام بطاقة التأمين الوطنية",
+  "navigation": {
+    "dashboard": "لوحة المعلومات",
+    "citizenProfiles": "ملفات المواطنين",
+    "cardManagement": "إدارة البطاقات",
+    "institutions": "المؤسسات",
+    "reports": "التقارير",
+    "support": "الدعم"
+  },
+  "user": {
+    "profile": "الملف الشخصي",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج"
+  },
+  "footer": {
+    "rights": "© {{year}} نظام بطاقة التأمين الوطنية. جميع الحقوق محفوظة.",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الخدمة",
+    "contact": "اتصل بنا"
+  },
+  "dashboard": {
+    "title": "لوحة المعلومات",
+    "stats": {
+      "totalCitizens": "إجمالي المواطنين",
+      "cardsIssued": "البطاقات المصدرة",
+      "pendingCards": "البطاقات المعلقة",
+      "activeInstitutions": "المؤسسات النشطة"
+    },
+    "recentActivity": {
+      "title": "النشاط الأخير",
+      "viewAll": "عرض كل النشاطات",
+      "actions": {
+        "cardIssued": "تم إصدار البطاقة",
+        "profileAccessed": "تم الوصول إلى الملف الشخصي",
+        "cardRevoked": "تم إلغاء البطاقة",
+        "newCitizen": "تم تسجيل مواطن جديد"
+      }
+    },
+    "alerts": {
+      "title": "التنبيهات",
+      "messages": {
+        "pendingCards": "{{count}} بطاقة معلقة بانتظار الإصدار",
+        "expiringLicenses": "{{count}} ترخيص مؤسسة ينتهي هذا الشهر",
+        "maintenance": "صيانة النظام مجدولة في {{date}}"
+      }
+    }
+  }
+}
