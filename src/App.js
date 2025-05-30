@@ -7,12 +7,12 @@ import Login from './components/auth/Login';
 import CitizenList from './components/citizens/CitizenList';
 import CitizenForm from './components/citizens/CitizenForm';
 import CitizenDetail from './components/citizens/CitizenDetail';
+import { CardList, CardDetail, CardIssue } from './components/cards';
 import theme from './theme/theme';
 import './App.css';
 import { useTranslation } from 'react-i18next';
 
 // Placeholder components for routes (to be developed)
-const CardManagement = () => <div>Card Management Page</div>;
 const Institutions = () => <div>Institutions Page</div>;
 const Reports = () => <div>Reports Page</div>;
 const Support = () => <div>Support Page</div>;
@@ -54,7 +54,9 @@ function App() {
               <Route path="/citizens/new" element={<CitizenForm />} />
               <Route path="/citizens/:id" element={<CitizenDetail />} />
               <Route path="/citizens/:id/edit" element={<CitizenForm />} />
-              <Route path="/cards" element={<CardManagement />} />
+              <Route path="/cards" element={<CardList />} />
+              <Route path="/cards/:id" element={<CardDetail />} />
+              <Route path="/cards/issue" element={<CardIssue />} />
               <Route path="/institutions" element={<Institutions />} />
               <Route path="/reports" element={<Reports />} />
               <Route path="/support" element={<Support />} />
