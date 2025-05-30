@@ -45,5 +45,50 @@
         "maintenance": "System maintenance scheduled for {{date}}"
       }
     }
+  },
+
+
+  
+  "reports": {
+    "title": "Reports",
+    "overview": "Overview",
+    "description": "View reports and statistics about citizens, cards, and institutions in the system.",
+    "citizenReports": "Citizen Reports",
+    "cardReports": "Card Reports",
+    "institutionReports": "Institution Reports",
+    "timePeriod": "Time Period",
+    "lastWeek": "Last Week",
+    "lastMonth": "Last Month",
+    "lastQuarter": "Last Quarter",
+    "lastHalfYear": "Last Half Year",
+    "lastYear": "Last Year",
+    "allTime": "All Time",
+    "citizensByAge": "Citizens by Age",
+    "citizensByGender": "Citizens by Gender",
+    "registrationTrend": "Registration Trend",
+    "cardsByStatus": "Cards by Status",
+    "cardStatus": {
+      "active": "Active",
+      "pending": "Pending",
+      "expired": "Expired",
+      "revoked": "Revoked"
+    },
+    "cardIssuanceTrend": "Card Issuance Trend",
+    "cardUsageByInstitution": "Card Usage by Institution",
+    "institutionsByType": "Institutions by Type",
+    "institutionsByStatus": "Institutions by Status",
+    "licenseExpiryTrend": "License Expiry Trend",
+    "keyInsights": "Key Insights",
+    "insights": {
+      "citizenAge": "The 19-30 age group represents the largest segment of registered citizens.",
+      "citizenGender": "The distribution between males and females is nearly balanced in the system.",
+      "registrationTrend": "There is a steady increase in new citizen registrations over the past six months.",
+      "cardStatus": "The majority of cards (81%) are in active status, with 11% expired needing renewal.",
+      "cardIssuance": "May saw the highest rate of card issuance in the first half of the year.",
+      "cardUsage": "Pharmacies are the most frequent users of cards, followed by hospitals.",
+      "institutionType": "Pharmacies represent the largest percentage of institutions registered in the system (41%).",
+      "institutionStatus": "75% of institutions are active, with 13% pending approval.",
+      "licenseExpiry": "There is an increase in the number of expired licenses in May, with a corresponding increase in renewals."
+    }
   }
 }

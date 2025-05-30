@@ -8,13 +8,13 @@ import CitizenList from './components/citizens/CitizenList';
 import CitizenForm from './components/citizens/CitizenForm';
 import CitizenDetail from './components/citizens/CitizenDetail';
 import { CardList, CardDetail, CardIssue } from './components/cards';
+import { InstitutionList, InstitutionDetail, InstitutionForm } from './components/institutions';
+import { Reports } from './components/reports'; // استيراد مكون التقارير
 import theme from './theme/theme';
 import './App.css';
 import { useTranslation } from 'react-i18next';
 
-// Placeholder components for routes (to be developed)
-const Institutions = () => <div>Institutions Page</div>;
-const Reports = () => <div>Reports Page</div>;
+// Placeholder component for Support route (to be developed)
 const Support = () => <div>Support Page</div>;
 
 function App() {
@@ -57,7 +57,10 @@ function App() {
               <Route path="/cards" element={<CardList />} />
               <Route path="/cards/:id" element={<CardDetail />} />
               <Route path="/cards/issue" element={<CardIssue />} />
-              <Route path="/institutions" element={<Institutions />} />
+              <Route path="/institutions" element={<InstitutionList />} />
+              <Route path="/institutions/new" element={<InstitutionForm />} />
+              <Route path="/institutions/:id" element={<InstitutionDetail />} />
+              <Route path="/institutions/:id/edit" element={<InstitutionForm />} />
               <Route path="/reports" element={<Reports />} />
               <Route path="/support" element={<Support />} />
               <Route path="*" element={<Navigate to="/dashboard" replace />} />
